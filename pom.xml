@@ -19,6 +19,8 @@
   
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.11</junit.version>
+    <!-- Création d’une propriété mode avec la valeur DEV. -->
+     <mode>DEV</mode>
 </properties>
 
   <dependencies>
@@ -43,6 +45,14 @@
   <build>
 
     <finalName>${project.artifactId}</finalName>
+
+    <!-- Activation du remplacement des variables via Maven -->
+    <resources>
+              <resource>
+                    <directory>src/main/resources</directory>
+                   <filtering>true</filtering>
+              </resource>
+   </resources>
 
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -115,4 +125,24 @@
  </plugins>
 
   </build>
+
+   <profiles>
+     <profile>
+            <id>dev</id>
+            <activation>
+                   <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                     <mode>DEV</mode>
+             </properties>
+   </profile>
+   <profile>
+            <id>prod</id>
+            <properties>
+                     <mode>PROD</mode>
+            </properties>
+   </profile>
+
+</profiles>
+	
 </project>
